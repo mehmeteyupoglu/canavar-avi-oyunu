@@ -32,4 +32,28 @@ new Vue({
       this.player_heal -= point;
     },
   },
+  watch: {
+    player_heal(value) {
+      if (value <= 0) {
+        this.player_heal = 0;
+        if (confirm("Oyunu kaybettin. Tekrar denemek ister misin?")) {
+          this.player_heal = 100;
+          this.monster_heal = 100;
+        }
+      } else if (value >= 100) {
+        this.player_heal = 100;
+      }
+    },
+    monster_heal(value) {
+      if (value <= 0) {
+        this.monster_heal = 0;
+        if (confirm("Oyunu kazandın. Tekrar denemek ister misin?")) {
+          this.player_heal = 100;
+          this.monster_heal = 100;
+        }
+      } else if (value >= 100) {
+        this.monster_heal = 100;
+      }
+    },
+  },
 });
